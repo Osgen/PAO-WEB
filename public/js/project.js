@@ -1,11 +1,17 @@
+
+//Get id project from url
 let str = window.location.href;
 let id = str.split("=")[1];
-console.log(id);
+//console.log(id);
 let linkPdf;
 let iduser;
 
+//Set firebase reference to projects
 const project = firebase.database().ref('projects/'+id);
+
+//Get all the values from projects reference
 project.on('value', snap =>{
+  //Create list for html
   const head = `
   <div class="fill" style="background-image:url('${snap.val().image}');">
     <div class="hero">
@@ -15,8 +21,10 @@ project.on('value', snap =>{
   linkPdf = snap.val().pdf;
   document.getElementById('head-project').innerHTML=head;
 
+//Watch fireabse authentication state
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
+      iduser = user.email;  
       if(user.email!=snap.val().evaluator)
       {
         document.getElementById('do-grade').classList.add('hidden');
@@ -28,12 +36,6 @@ project.on('value', snap =>{
     } 
   });
 })
-
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    iduser = user.email;  
-  } 
-});
 
 function goHome(where)
 {

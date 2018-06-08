@@ -1,16 +1,18 @@
 
-
+//Set control variables and object announcement atributes
 let file;
 let image;
 let iduser;
 let announcement={goal:null, image:null, title:null, body:null, howto:null, to:null, pdf:null};
 
+//Watch authentication state
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       iduser = user.email;  
     } 
   });
 
+//Get the files upload from html
 function uploadFile()
 {
   let pdf = document.getElementById('pdf');
@@ -32,7 +34,7 @@ function goHome(where)
   location.href=`index.html?id=${iduser}${where}`;
 }
 
-
+//Fill all announcemet attributes
 function submit()
 {
   announcement.title =document.getElementById('title').value;
@@ -57,6 +59,8 @@ function submit()
       announcement.title = announcement.title.toUpperCase();
       announcement.pdf = urlFile;
       announcement.image = urlImage;
+
+      //Push to firebase announcements
       firebase.database().ref('announcements').push(announcement, function(error){
         if(!error)
         {

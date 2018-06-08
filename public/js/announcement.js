@@ -1,19 +1,25 @@
-
+//Set Objects attributes
 project ={title:null, pdf:null, image:null, iduser:null, idann:null};
 request ={pdf:null, announcement:null, user:null};
 
 
-const refProject = firebase.database().ref("projects");
-let file;
-let image;
+
+//Get id from url
 let str = window.location.href;
 str = str.split("=")[1];
 let id = str.split("#")[0];
+
 let iduser;
 let pdfEvaluator
 let pdfAnnoun;
+let file;
+let image;
 
+//Set firebase references
+const refProject = firebase.database().ref("projects");
 const refAnnouncement = firebase.database().ref("announcements/" + id);
+
+//Get all JSONs from firebase in with Announcement reference
 refAnnouncement.on("value", snap => {
   announcement = snap.val();
   //console.log(announcement);
@@ -21,6 +27,7 @@ refAnnouncement.on("value", snap => {
   document.getElementById("announcement_to").innerHTML = announcement.to;
   document.getElementById("announcement_howto").innerHTML = announcement.howto;
   pdfAnnoun = announcement.pdf;
+  //Create objects list for html
   const announ = `
               <div class="fill"  style="background-image:url('${announcement.image}');">
                 <div class="hero">
@@ -34,7 +41,7 @@ function pdfAnnouncement()
 {
   window.open(pdfAnnoun);
 }
-
+//Get uploaded images and files from html
 function uploadFile()
 {
   let pdf = document.getElementById('pdf');
@@ -59,6 +66,7 @@ function uploadImage()
   });
 }
 
+//Get all info to create a new project
 function sumit()
 {
   let  title =document.getElementById('title').value;
@@ -81,6 +89,8 @@ function sumit()
       project.pdf = urlFile;
       project.image = urlImage;
       project.idann = id;
+
+      //Upload to firebase with projects reference
       firebase.database().ref('projects').push(project, function(error){
         if(!error)
         {
@@ -92,6 +102,7 @@ function sumit()
   });
 }
 
+//Get all info to create a new request
 function submitEvaluator()
 {
   let storagePdf = firebase.storage().ref(pdfEvaluator.name);
@@ -103,6 +114,8 @@ function submitEvaluator()
     request.user = iduser;
     request.announcement=id;
     request.pdf = urlPdf
+
+    //Upload to firebase with projects reference
     firebase.database().ref('requests').push(request, function(error){
       if(!error)
       {
@@ -113,6 +126,7 @@ function submitEvaluator()
   });
 }
 
+//Watch authentication state
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     iduser = user.email;  
@@ -124,6 +138,7 @@ function goHome(where)
   location.href=`index.html?id=${iduser}${where}`;
 }
 
+//Authentication controls
 function showTakePart()
 {
   if(iduser!=undefined)

@@ -1,16 +1,18 @@
+
+//Set firebase reference for requests
 const refRequests = firebase.database().ref("requests");
 
 let requestsnKeys=[];
 let requestsKeys=[];
 let requests=[];
 let iduser;
-
+//Watch firebase authentication
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       iduser = user.email;  
     } 
   });
-
+//Get all values from requests reference
 refRequests.on("value", snap => {
     requestsKeys = Object.keys(snap.val());
     requestsnKeys = snap.val();
@@ -26,7 +28,7 @@ refRequests.on("value", snap => {
             requests[i].id = requestsKeys[i];
           }
           //console.log(requests);
-        
+        //Create list for html request
           const Allrequests = `
           <div class="panel-group" id="accordion">
               ${requests.map(request =>`
@@ -54,12 +56,12 @@ refRequests.on("value", snap => {
           document.getElementById("requests-list").innerHTML = Allrequests;
     }
   });
-
+//Delete registry from requests/id
   function reject(id)
   {
     firebase.database().ref("requests/"+id).remove();
   }
-
+//Delete registry from requests/id but add it into evaluators
   function acept(emailAnnouncement)
   {
     let email = emailAnnouncement.split('+')[0];

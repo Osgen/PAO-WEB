@@ -1,4 +1,4 @@
-//col-xs-6 OLD LOGIN FORMAT
+//Create new user with firebase authentication
 function signUp()
 {
     let email = document.getElementById('emailSign').value;
@@ -20,6 +20,7 @@ function goHome(where)
   location.href=`index.html?id=${where}`;
 }
 
+//Log in with firebase authentication
 function login()
 {
     let email = document.getElementById('emailLogin').value;

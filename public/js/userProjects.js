@@ -1,5 +1,6 @@
+//Firebase root reference
 const rootRef = firebase.database().ref();
-
+//Get id from url
 let str = window.location.href;
 str = str.split("=")[1];
 let id = str.split("#")[0];
@@ -10,8 +11,10 @@ function take_part_projects()
   let projectsKeys=[];
   let projectsnKeys=[];
   let projects=[];
-
+//Set firebase reference to projects which are equal to an id
   const projectRef = rootRef.child('projects').orderByChild('iduser').equalTo(id);
+
+  //Get all values from projects reference
     projectRef.on('value', snap => {
       projectsKeys = Object.keys(snap.val());
       projectsnKeys = snap.val();
@@ -21,7 +24,7 @@ function take_part_projects()
         projects[i] = projectsnKeys[projectsKeys[i]];
         projects[i].id = projectsKeys[i];
       }
-
+//Create list html for projects
       const userProject = `
       <div class="portfolioContainer">
         ${projects.map(project =>`
@@ -44,7 +47,10 @@ function take_part_projects()
       let evaluateProjectsKeys=[];
       let evaluateProjectsnKeys=[];
       let evaluateProjects=[];
+      //Set firebase reference to projects which are equal to an id
       const evaluateProjectRef= rootRef.child('projects').orderByChild('evaluator').equalTo(id);
+      
+  //Get all values from projects reference
       evaluateProjectRef.on('value', snap=> {
         evaluateProjectsKeys = Object.keys(snap.val());
         evaluateProjectsnKeys = snap.val();
@@ -57,6 +63,8 @@ function take_part_projects()
           
         }
         //console.log(evaluateProjects.id);
+
+        //Create list html for projects
         const userEvaluateProjects = `
         <div class="portfolioContainer">
         ${evaluateProjects.map(eval =>`

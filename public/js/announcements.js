@@ -1,3 +1,5 @@
+
+//Get reference for announcements root from firebase
 const refAnnouncements = firebase.database().ref("announcements");
 
 
@@ -5,6 +7,7 @@ let announcementsnKeys = [];
 let announcementKeys = [];
 let announcements = [];
 
+//Get all the info with announcements reference
 refAnnouncements.on("value", snap => {
   announcementKeys = Object.keys(snap.val());
   announcementsnKeys = snap.val();
@@ -14,7 +17,7 @@ refAnnouncements.on("value", snap => {
     announcements[i].id = announcementKeys[i];
   }
   // console.log(announcements);
-
+//Create list for html
   const announc = `
     <ul class="thumbnails" >
         ${announcements.map(ann => `

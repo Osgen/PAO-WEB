@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+        <script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-storage.js"></script>
+        <script>  // Initialize Firebase
+            var config = {
+              apiKey: "AIzaSyC4zbttQQJu28z90VGm9fyF7TDcbsIB9Wk",
+              authDomain: "projectappreciationonline.firebaseapp.com",
+              databaseURL: "https://projectappreciationonline.firebaseio.com",
+              projectId: "projectappreciationonline",
+              storageBucket: "projectappreciationonline.appspot.com",
+              messagingSenderId: "336967186612"
+            };
+            firebase.initializeApp(config);</script>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>PAO: Project Appreciation Online</title>
+
+	<link href="css/style.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+    
+	<link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Hammersmith+One' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=NTR' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+    <script src="js/announcement.js"></script>
+     <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Cherry <span>Software</span></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#mainCarousel" onclick="goHome('#mainCarousel')">Home</a>
+                    </li>
+                    <li>
+                        <a href="#about" onclick="goHome('#about')">Conócenos</a>
+                    </li>
+                    <li>
+                        <a href="#portfolio" onclick="goHome('#portfolio')">Mis Proyectos</a>
+                    </li>
+                    <li>
+                        <a href="#blog" onclick="goHome('#blog')">Convocatorias</a>
+                    </li>
+                    <li>
+                        <a href="#contact" onclick="goHome('#contact')">Contáctanos</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+      <style>
+        .panel-default > .panel-heading {
+            background-color: #3299CC!important;
+            border-color: #3299CC!important;
+
+        }
+
+        .navbar-default {
+            background-color: transparent;
+            border-color: transparent;
+            -webkit-transition: all 0.5s ease 0s;
+            -o-transition: all 0.5s ease 0s;
+            transition: all 0.5s ease 0s;
+        }
+        
+        .navbar-nav { 
+            margin-top: 40px;
+            float: right;
+        }
+        
+        @media screen and (max-width: 767px) {
+        .navbar-nav {
+            float: none;
+            text-align: center;
+            background: rgba(25, 33, 60, 0.5);
+        }
+        }
+        
+        .navbar-default .navbar-brand {
+            margin-top: 40px;
+            font-size: 28px;
+            font-family: 'Righteous', cursive;
+            color: #fff;
+            letter-spacing: 1px;
+            -moz-transition:color .5s ease-in;
+            -o-transition:color .5s ease-in;
+            -webkit-transition:color .5s ease-in;
+        }
+        
+        .navbar-default .navbar-brand span {
+            color: #42a5f6;
+            -moz-transition:color .5s ease-in;
+            -o-transition:color .5s ease-in;
+            -webkit-transition:color .5s ease-in;
+        }
+        
+        @media screen and (max-width: 400px) {
+        .navbar-default .navbar-brand {
+            font-size: 22px;
+        }
+        }
+        
+        .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand span:hover {
+            color: #3D99B8;
+        }
+        
+        .navbar-default .navbar-nav>li>a {
+            color: #fff;
+            font-size: 14px;
+            font-family: 'Noto Sans', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .navbar-default .navbar-nav>li>a:hover {
+            color: #42a5f6;
+        }
+        
+        .navbar-default .navbar-nav>li>a:focus {
+            color: #42a5f6;
+        }
+        
+        .navbar-default .navbar-toggle {
+            margin-top: 40px;
+            border: none;
+        }
+        
+        .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+            background: none;
+        }
+        
+        .navbar-default .navbar-toggle .icon-bar {
+            height: 4px;
+            width: 28px;
+            background: #42a5f6;
+        }
+        
+        .navbar-default.shrink {
+            background:rgba(25, 33, 60, 0.8)
+        }
+        
+        .navbar-default.shrink .navbar-nav {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .navbar-default.shrink .navbar-brand {
+            margin-top: 20px;
+        }
+        
+        .navbar-default.shrink .navbar-toggle {
+            margin-top: 25px;
+        }
+
+    
+    </style>
+    <!-- Full Page Image Background Carousel Header -->
+    <header id="mainCarousel" class="carousel slide">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#mainCarousel" data-slide-to="0" class="active"></li>
+        </ol>
+
+        <!-- Wrapper for Slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+            <div class="slider_overlay" id="announcement_title">
+                
+            </div>
+                <!-- Set the first background image using inline CSS below. -->
+            </div>
+    </header>
+    <div id="about">
+        <div class="container">
+            <div class="text">
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                <h3 class="panel-title">Objetivo</h3>
+                </div>
+                <div class="panel-body">
+                <p id="announcement_goal"></p>
+                </div>
+                </div>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                <h3 class="panel-title">Dirigido a</h3>
+                </div>
+                <div class="panel-body">
+                <p id="announcement_to"></p>
+                </div>
+                </div>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                <h3 class="panel-title">Como participar</h3>
+                </div>
+                <div class="panel-body">
+                <p id="announcement_howto"></p>
+                </div>
+                <hr>
+                    <a href="#" class="card-link" onClick="pdfAnnouncement()">Ver Pdf</a>
+                <hr>
+                </div>
+                <input type="button" value="Participar" class="btn btn-info" onclick="showTakePart()">
+                <input type="button" value="Evaluar" class="btn btn-info" onclick="showEvaluate()">
+                <li class="hidden" id="take_part_login">
+					<a href="Login.html" class="current">Iniciar Sesión</a>
+                </li>
+                <div class="hidden" id="evaluate">
+                        <hr>
+                        <h1>Subir PDF</h1>
+                        <hr>
+                        <input type="file" class="btn btn-mini" href="" id="pdfEvaluate" onclick="uploadPdf()"></input>
+                        <hr>
+                        <hr>
+                        <input type="button" value="Enviar" class="btn btn-info" onclick="submitEvaluator()">
+                        <hr>
+                </div>
+                <div class="hidden" id="take_part">
+                    <hr>
+                    <h1>Título</h1>
+                    <hr>
+                    <input type="title" class="form-control" id="title">
+                    <hr>
+                    <h1>Subir PDF</h1>
+                    <hr>
+                    <input type="file" class="btn btn-mini" href="" id="pdf" onclick="uploadFile()"> </input>
+                    <hr>
+                    <h1>Imagen del proyecto</h1>
+                    <hr>
+                    <input type="file" class="btn btn-mini" href="#" id="image" onclick="uploadImage()"></input>
+                    <hr>
+                    <hr>
+                    <input type="button" value="Enviar" class="btn btn-info" onclick="sumit()">
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    
+    <script src="js/jquery.isotope.js"></script>
+    
+    <script src="js/jquery.scrollUp.min.js"></script>
+    
+    
+    <script type="text/javascript">
+    
+    $('a[href^="#"]').on('click', function(event) {
+        var target = $(this.getAttribute('href'));
+        if( target.length ) {
+            event.preventDefault();
+            $('html, body').stop().animate({
+                scrollTop: target.offset().top
+            }, 1000);
+        }
+    });
+
+    </script>
+    
+    
+    <!-- Navbar Change on Scroll -->
+    <script type="text/javascript">
+        $(function(){
+        var shrinkHeader = 100;
+        $(window).scroll(function() {
+            var scroll = getCurrentScroll();
+            if ( scroll >= shrinkHeader ) {
+                $('.navbar-default').addClass('shrink');
+            }
+            else {
+                $('.navbar-default').removeClass('shrink');
+            }
+        });
+        function getCurrentScroll() {
+            return window.pageYOffset || document.documentElement.scrollTop;
+        }
+    });
+
+    </script>    
+
+
+    <!-- Portfolio Isotope Settings -->
+    <script type="text/javascript">
+
+    $(window).load(function(){
+  
+  
+     var $container = $('.portfolioContainer'),
+        $body = $('body'),
+        colW = 375,
+        columns = null;
+
+  
+    $container.isotope({
+    // disable window resizing
+        resizable: true,
+        masonry: {
+        columnWidth: colW
+        }
+    });
+  
+    $(window).smartresize(function(){
+    // check if columns has changed
+        var currentColumns = Math.floor( ( $body.width() -30 ) / colW );
+        if ( currentColumns !== columns ) {
+        // set new column count
+        columns = currentColumns;
+        // apply width to container manually, then trigger relayout
+        $container.width( columns * colW )
+            .isotope('reLayout');
+        }
+    
+    }).smartresize(); // trigger resize to set container width
+    $('.portfolioFilter a').click(function(){
+            $('.portfolioFilter .current').removeClass('current');
+            $(this).addClass('current');
+ 
+            var selector = $(this).attr('data-filter');
+            $container.isotope({
+            
+            filter: selector,
+         });
+             return false;
+        });
+  
+    });
+
+    </script>
+    
+    
+    <!-- Scroll To Top Settings -->
+    <script type="text/javascript">
+    
+    $(function () {
+        $.scrollUp({
+            scrollName: 'scrollUp', // Element ID
+            topDistance: '300', // Distance from top before showing element (px)
+            topSpeed: 600, // Speed back to top (ms)
+            animation: 'fade', // Fade, slide, none
+            animationInSpeed: 200, // Animation in speed (ms)
+            animationOutSpeed: 200, // Animation out speed (ms)
+            activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+            scrollImg: true,
+        });
+    });
+    
+    </script>
+</body>
+</html>

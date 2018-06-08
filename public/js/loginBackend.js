@@ -52,7 +52,7 @@ function showSignUP()
 {
     let signUpHead = document.getElementById("register-form-link");
     signUpHead.classList.add("active");
-    signUpHead.innerHTML="Sign Up";
+    signUpHead.innerHTML="Crear cuenta";
     document.getElementById("login-form").style.display="none";
     document.getElementById("login_head").style.display="none";
     document.getElementById("register-form").style.display="block";
